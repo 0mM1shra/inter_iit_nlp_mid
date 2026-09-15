@@ -24,7 +24,7 @@ NLP/
 │   ├── MIDTERM_SUBMISSION.md                   # Central Submission Index
 │   ├── 01_preliminary_research_document.md     # Research Document & Reading Log (30% Weight)
 │   ├── 02_preliminary_system_architecture.md   # Preliminary System Architecture Specification
-│   └── 03_one_page_report.md                   # One-Page Domain & Approach Report
+│   └── 03_one_page_report.pdf                  # One-Page Domain & Approach Report
 ├── customer_360_dataset/
 │   ├── README_dataset_schema.md                # Dataset Schema & Output Enum Guidelines
 │   ├── scenario_01/                            # Scenario 01: Medical Hardship (Marcus Vance)
