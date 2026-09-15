@@ -1,6 +1,7 @@
 # Preliminary Research Document & Reading Log
 **Project**: Agentic Customer 360 — Proactive Intervention Desk  
 **Event**: Inter IIT Tech Meet 15.0 Prepathon (NLP Track)  
+**Author**: Om Mishra | Electronics Engineering (3rd Year), IIT (BHU) Varanasi | Roll No.: 24095073  
 **Submission Date**: September 15, 2026 (Mid-Term Deliverable)  
 
 ---

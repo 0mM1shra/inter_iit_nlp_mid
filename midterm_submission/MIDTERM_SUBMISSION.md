@@ -1,6 +1,7 @@
 # Inter IIT Tech Meet 15.0 Prepathon — Mid-Term Submission
 **Problem Statement**: Agentic Customer 360 — Proactive Intervention Desk  
 **Track**: Natural Language Processing (NLP)  
+**Author**: Om Mishra | Electronics Engineering (3rd Year), IIT (BHU) Varanasi | Roll No.: 24095073  
 **Submission Deadline**: September 15, 2026 (EoD)  
 **GitHub Repository**: https://github.com/0mM1shra/inter_iit_nlp_mid  
 **Submission Form Link**: [Google Form Submission Link](https://forms.gle/1MKiqta6dVjoY7D76)  
