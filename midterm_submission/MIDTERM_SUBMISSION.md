@@ -2,6 +2,7 @@
 **Problem Statement**: Agentic Customer 360 — Proactive Intervention Desk  
 **Track**: Natural Language Processing (NLP)  
 **Submission Deadline**: September 15, 2026 (EoD)  
+**GitHub Repository**: https://github.com/0mM1shra/inter_iit_nlp_mid  
 **Submission Form Link**: [Google Form Submission Link](https://forms.gle/1MKiqta6dVjoY7D76)  
 
 ---
