@@ -43,7 +43,7 @@ NLP/
 |---|---|---|
 | **Deliverable 1: Preliminary Research Document** | [`midterm_submission/01_preliminary_research_document.md`](midterm_submission/01_preliminary_research_document.md) | Grounded in 10 arXiv papers (MemGPT, MetaGPT, DyLAN, Self-RAG, Guardrails AI, Calibrated HITL), 5 engineering blogs (Stripe, Uber Flink, Netflix, Databricks, DoorDash), 4 agent frameworks (LangGraph, AutoGen, CrewAI, NeMo Guardrails), and explicit Event Stream Analysis. |
 | **Deliverable 2: System Architecture Spec** | [`midterm_submission/02_preliminary_system_architecture.md`](midterm_submission/02_preliminary_system_architecture.md) | Visual Mermaid Flowchart, Event-Time Streaming Ingestion, Shared Per-Customer State Board, 3-Tiered Memory Architecture, Swarm + Debate + Refiner Topologies, and Non-Negotiable Safety Rails. |
-| **Deliverable 3: One-Page Report** | [`midterm_submission/03_one_page_report.md`](midterm_submission/03_one_page_report.md) | Executive summary analyzing ambient vs. prompt-based agents, early lead-time vs overreaction, scenario learnings (`scenario_01`, `scenario_02`, `scenario_03`), red herring isolation, and execution roadmap to final submission. |
+| **Deliverable 3: One-Page Report (LaTeX Source)** | [`midterm_submission/one_page_report.tex`](midterm_submission/one_page_report.tex) | Professional 1-page LaTeX source file (\texttt{.tex}) detailing domain insights, dataset/event stream learnings, architectural progress achieved till now, and future execution plans (without dates/deadlines). |
 | **Submission Index** | [`midterm_submission/MIDTERM_SUBMISSION.md`](midterm_submission/MIDTERM_SUBMISSION.md) | Central submission summary file. |
 
 ---

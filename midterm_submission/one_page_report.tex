@@ -1,0 +1,67 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=0.5in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+\definecolor{primary}{RGB}{140, 20, 20}
+\definecolor{secondary}{RGB}{40, 40, 40}
+\definecolor{linkcolor}{RGB}{0, 80, 160}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=linkcolor,
+    urlcolor=linkcolor
+}
+
+\setlist[itemize]{noitemsep, topsep=1pt, parsep=1pt, partopsep=0pt, leftmargin=12pt}
+\pagestyle{empty}
+
+\begin{document}
+
+\begin{center}
+    {\LARGE \bfseries \color{primary} Agentic Customer 360: Proactive Intervention Desk}\\[3pt]
+    {\large \bfseries Mid-Term Progress \& Future Execution Report}\\[4pt]
+    {\small \textbf{Author:} Om Mishra \quad|\quad \textbf{Department:} Electronics Engineering (3rd Year), IIT (BHU) Varanasi \quad|\quad \textbf{Roll No.:} 24095073}\\[2pt]
+    {\small \textbf{Track:} Natural Language Processing (NLP) \quad|\quad \textbf{Repository:} \href{https://github.com/0mM1shra/inter_iit_nlp_mid}{github.com/0mM1shra/inter\_iit\_nlp\_mid}}
+\end{center}
+\vspace{-4pt}
+
+\noindent{\color{primary}\rule{\textwidth}{1pt}}
+\vspace{-6pt}
+
+\subsubsection*{\color{primary} 1. Problem Domain Insights \& Key Challenges}
+Traditional enterprise CRM platforms rely on passive dashboards requiring manual account manager monitoring. Transitioning to an \textbf{Ambient Agentic Customer 360 Desk} introduces three core domain challenges:
+\begin{itemize}
+    \item \textbf{Ambient Execution vs. Prompt-Based Chatbots:} System must operate as an asynchronous background engine, continuously triggered by multi-modal event streams or scheduled account checks rather than waiting for human prompts.
+    \item \textbf{Early Lead Time vs. Premature Overreaction:} The system must infer subtle behavioral shifts early (e.g., identifying pre-churn savings withdrawal) while suppressing premature, low-confidence interventions on noise.
+    \item \textbf{Red Herring Isolation:} Real-world financial telemetry contains high-variance noise (e.g., tuition transfers, vacation refunds, tax deposits). The system must correlate multi-domain signals over time to isolate real signals.
+\end{itemize}
+
+\subsubsection*{\color{primary} 2. Dataset \& Event Stream Learnings}
+Deep analysis of the multi-source event stream package and practice scenario timelines yielded key structural insights:
+\begin{itemize}
+    \item \textbf{Multi-Source Schema Envelope:} Payload ingestion normalizes streams across \texttt{card\_payments}, \texttt{ach\_wire}, \texttt{core\_banking\_ledger}, \texttt{trading\_brokerage}, \texttt{loan\_kyc}, \texttt{web\_app\_events}, and \texttt{support\_logs}.
+    \item \textbf{Out-of-Order Watermarking:} Ingested events are replayed via an event-time watermark queue (\texttt{event\_time} vs. \texttt{ingestion\_time}) to prevent late-arriving packets from corrupting 30-day windowed rolling rollups.
+    \item \textbf{Cross-Domain Signal Correlation:} Evaluated ground-truth timelines (\textit{Medical Hardship}, \textit{New Child Event}, \textit{Churn Risk}) confirm that high-confidence state inference requires correlating signals across KYC updates, transaction anomalies, and support ticket sentiment.
+\end{itemize}
+
+\subsubsection*{\color{primary} 3. Current Architectural Progress Achieved}
+\begin{itemize}
+    \item \textbf{Per-Customer Shared State Board:} Designed a structured blackboard scoped per customer ID. Swarm agents (\texttt{UsageAgent}, \texttt{SupportAgent}, \texttt{TxnAgent}, \texttt{KYCAgent}) write structured conclusions to eliminate multi-tenant memory leakage.
+    \item \textbf{3-Tiered Memory Architecture:} Formulated Working Memory (session context), Episodic Memory (decay-weighted historical event RAG), and Semantic Memory (product/policy RAG).
+    \item \textbf{Multi-Agent Debate \& Refiner Topologies:} Implemented debate protocols for reconciling contradictory swarm reads (e.g., tax deposit vs. app drop) and a Critique-Refiner pass for tone/compliance checking.
+    \item \textbf{Safety Rails \& Calibrated HITL:} Integrated hardcoded regex guardrails for instant legal/AML threat bypass, data-layer PII redaction, and citation-backed human-in-the-loop (HITL) checkpoints.
+    \item \textbf{Automated Evaluation Harness:} Built a Python scoring harness (\texttt{evaluate\_scenarios.py}) measuring inference accuracy, action precision, HITL calibration, and false-positive avoidance against ground-truth benchmarks.
+\end{itemize}
+
+\subsubsection*{\color{primary} 4. Future Execution Roadmap}
+\begin{itemize}
+    \item \textbf{Phase 1: End-to-End Stream Pipeline Implementation:} Stitching real-time stream replayers, state board storage, and parallel swarm workers into a unified runtime engine.
+    \item \textbf{Phase 2: Synthesis Engine \& Multi-Agent Debate Layer:} Finalizing LLM prompt chains for life-phase inference, dynamic hypothesis weighting, and automated contradiction resolution.
+    \item \textbf{Phase 3: Interactive HITL Dashboard \& Audit Logging:} Developing a lightweight human review interface featuring citation-backed "Ask Why" explanations and OpenTelemetry trace logging.
+    \item \textbf{Phase 4: Full Scenario Benchmarking \& Final Deliverables:} Executing end-to-end evaluation across all stream scenarios, optimizing lead times, and compiling the final 3-page solution document and GitHub repository.
+\end{itemize}
+
+\end{document}
