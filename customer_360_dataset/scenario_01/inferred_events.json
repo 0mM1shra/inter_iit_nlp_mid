@@ -5,8 +5,7 @@
     "confidence_band": "low",
     "action": "no_action",
     "action_subtype": null,
-    "hitl_status": "auto_approved",
-    "notes": "Inferred state 'medical_hardship' based on generalized evidence accumulation (Score: 2.85, Margin: 0.00). Cited signals: hospital_bill_posted. [Actor-Critic Audit]: Audited transaction transfers; confirmed tuition/tax transfers are isolated from medical hardship core evidence."
+    "hitl_status": "auto_approved"
   },
   {
     "as_of_time": "2026-03-12T00:00:00Z",
@@ -14,8 +13,7 @@
     "confidence_band": "low",
     "action": "no_action",
     "action_subtype": null,
-    "hitl_status": "auto_approved",
-    "notes": "Inferred state 'medical_hardship' based on generalized evidence accumulation (Score: 2.85, Margin: 0.00). Cited signals: hospital_bill_posted. [Actor-Critic Audit]: Audited transaction transfers; confirmed tuition/tax transfers are isolated from medical hardship core evidence."
+    "hitl_status": "auto_approved"
   },
   {
     "as_of_time": "2026-03-26T00:00:00Z",
@@ -23,7 +21,6 @@
     "confidence_band": "high",
     "action": "support_intervention",
     "action_subtype": "medical_hardship_payment_plan",
-    "hitl_status": "escalated",
-    "notes": "High confidence medical hardship confirmed. Recommending medical hardship payment plan support intervention."
+    "hitl_status": "escalated"
   }
 ]

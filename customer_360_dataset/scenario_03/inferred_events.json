@@ -5,8 +5,7 @@
     "confidence_band": "medium",
     "action": "no_action",
     "action_subtype": null,
-    "hitl_status": "auto_approved",
-    "notes": "State 'churn_risk' with confidence 'medium' does not satisfy policy action threshold."
+    "hitl_status": "auto_approved"
   },
   {
     "as_of_time": "2026-03-08T00:00:00Z",
@@ -14,8 +13,7 @@
     "confidence_band": "high",
     "action": "relationship_manager_escalation",
     "action_subtype": "premium_retention_offer_and_fee_waiver",
-    "hitl_status": "escalated",
-    "notes": "High confidence churn risk detected via standing instruction cancellation and engagement drop. Escalate to relationship manager."
+    "hitl_status": "escalated"
   },
   {
     "as_of_time": "2026-04-10T00:00:00Z",
@@ -23,7 +21,6 @@
     "confidence_band": "high",
     "action": "proactive_retention_outreach",
     "action_subtype": null,
-    "hitl_status": "auto_approved",
-    "notes": "Severe engagement drop and churn signals detected; initiating proactive retention outreach."
+    "hitl_status": "auto_approved"
   }
 ]
