@@ -6,7 +6,7 @@
     "action": "no_action",
     "action_subtype": null,
     "hitl_status": "auto_approved",
-    "notes": "Medical hardship inferred from ER visit, hospital billing, and income disruption. Red herrings (tuition wire/refund) audited and excluded from hardship score."
+    "notes": "Inferred state 'medical_hardship' based on generalized evidence accumulation (Score: 2.85, Margin: 0.00). Cited signals: hospital_bill_posted. [Actor-Critic Audit]: Audited transaction transfers; confirmed tuition/tax transfers are isolated from medical hardship core evidence."
   },
   {
     "as_of_time": "2026-03-12T00:00:00Z",
@@ -15,7 +15,7 @@
     "action": "no_action",
     "action_subtype": null,
     "hitl_status": "auto_approved",
-    "notes": "Medical hardship inferred from ER visit, hospital billing, and income disruption. Red herrings (tuition wire/refund) audited and excluded from hardship score."
+    "notes": "Inferred state 'medical_hardship' based on generalized evidence accumulation (Score: 2.85, Margin: 0.00). Cited signals: hospital_bill_posted. [Actor-Critic Audit]: Audited transaction transfers; confirmed tuition/tax transfers are isolated from medical hardship core evidence."
   },
   {
     "as_of_time": "2026-03-26T00:00:00Z",
@@ -24,6 +24,6 @@
     "action": "support_intervention",
     "action_subtype": "medical_hardship_payment_plan",
     "hitl_status": "escalated",
-    "notes": "Medical hardship confirmed. Recommending medical hardship payment plan support intervention."
+    "notes": "High confidence medical hardship confirmed. Recommending medical hardship payment plan support intervention."
   }
 ]

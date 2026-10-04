@@ -2,11 +2,11 @@
   {
     "as_of_time": "2026-02-15T00:00:00Z",
     "inferred_state": "churn_risk",
-    "confidence_band": "low",
+    "confidence_band": "medium",
     "action": "no_action",
     "action_subtype": null,
     "hitl_status": "auto_approved",
-    "notes": "Churn risk inferred from fee complaint, dropping engagement, and savings withdrawal."
+    "notes": "State 'churn_risk' with confidence 'medium' does not satisfy policy action threshold."
   },
   {
     "as_of_time": "2026-03-08T00:00:00Z",
@@ -15,7 +15,7 @@
     "action": "relationship_manager_escalation",
     "action_subtype": "premium_retention_offer_and_fee_waiver",
     "hitl_status": "escalated",
-    "notes": "Standing instruction cancelled and savings transferred. Route to relationship manager for retention."
+    "notes": "High confidence churn risk detected via standing instruction cancellation and engagement drop. Escalate to relationship manager."
   },
   {
     "as_of_time": "2026-04-10T00:00:00Z",
@@ -24,6 +24,6 @@
     "action": "proactive_retention_outreach",
     "action_subtype": null,
     "hitl_status": "auto_approved",
-    "notes": "Late stage churn risk; initiating proactive retention outreach."
+    "notes": "Severe engagement drop and churn signals detected; initiating proactive retention outreach."
   }
 ]

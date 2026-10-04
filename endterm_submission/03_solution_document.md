@@ -1,7 +1,7 @@
 # End-Term Solution Document
 **Project**: Agentic Customer 360 — Proactive Intervention Desk  
 **Framework**: `ACT-TREE 360` (Actor-Critic Blackboard Swarm with Dynamic Life-Phase Hypothesis Trees)  
-**Track**: Natural Language Processing (NLP) — Inter IIT Tech Meet 15.0  
+**Track**: Natural Language Processing (NLP) — Inter IIT Tech Meet 15.0 Prepathon  
 **Author**: Om Mishra | Electronics Engineering (3rd Year), IIT (BHU) Varanasi | Roll No.: 24095073  
 
 ---
@@ -30,17 +30,17 @@ To solve real-world stream noise and premature overreaction, we propose **`ACT-T
 ### 2.1 Multi-Agent System (MAS) Coordination Topologies
 Rather than defaulting to a uniform topology everywhere, `ACT-TREE 360` composes distinct coordination topologies mapped to specific pipeline stages:
 
-- **Parallel Swarm Stage (Signal Ingestion)**: Independent domain agents (`UsageAgent`, `SupportAgent`, `TxnAgent`, `KYCAgent`) process incoming stream windows in parallel and publish structured assertions to the customer's State Board.
-- **Sequential Handoff Stage (Synthesis)**: The `SynthesisAgent` reads the State Board snapshot and evaluates likelihood updates across the Life-Phase Hypothesis Tree.
+- **Parallel Swarm Stage (Signal Ingestion)**: Independent domain agents (`UsageAgent`, `SupportAgent`, `TxnAgent`, `KYCAgent`) process incoming stream windows in parallel using real NLP (VADER sentiment analysis, TF-IDF semantic vector intent classification) and publish structured assertions to the customer's State Board.
+- **Sequential Handoff Stage (Synthesis)**: The `SynthesisAgent` reads the State Board snapshot and evaluates likelihood updates across the Life-Phase Hypothesis Tree using a generalized Bayesian evidence accumulator.
 - **Actor-Critic Debate Stage (Disagreement & Red Herring Audit)**: When swarm signals present ambiguity (e.g. tax refund deposit combined with standing instruction cancellation), the Actor and Critic agents debate counterfactual hypotheses to isolate red herrings.
 - **Round-Robin & Refiner Stage (Drafting & Compliance)**: The `ActionAgent` drafts the bounded intervention, which is audited by the `CritiqueRefinerAgent` for tone, eligibility terms, budget limits, and guardrails.
 
 ### 2.2 Shared Per-Customer State Board & Memory Architecture
 - **State Board**: Scoped strictly per `customer_id`. Agents publish key-value assertions with confidence scores and timestamped half-life decay ($\lambda_{usage} = 14\text{ days}$, $\lambda_{kyc} = 365\text{ days}$).
 - **3-Tiered Memory Hierarchy**:
-  - *Working Memory*: Active session state and open ticket text.
-  - *Episodic Memory*: Chronological log of past interventions and customer outcomes queried via decay-weighted RAG ($Score = \alpha \cdot \text{Recency} + \beta \cdot \text{Importance} + \gamma \cdot \text{Relevance}$).
-  - *Semantic Memory*: Product eligibility matrices and policy guidelines.
+  - *Working Memory*: Active session state and open ticket text (Redis).
+  - *Episodic Memory*: Chronological log of past interventions and customer outcomes (PostgreSQL).
+  - *Semantic Memory*: Product eligibility matrices and policy guidelines (pgvector).
 
 ### 2.3 Event-Time Watermarking & Stream Normalization
 Stream events are ingested and sorted strictly by `event_time` using an event-time watermark queue. This guarantees that late-arriving network packets (`ingestion_time` > `event_time`) do not corrupt 30-day windowed rolling rollups.
@@ -50,12 +50,12 @@ Stream events are ingested and sorted strictly by `event_time` using an event-ti
 ## 3. Benchmark Results, Non-Negotiables & Trade-Offs
 
 ### 3.1 Empirical Benchmark Evaluation Results
-The system was evaluated using the automated scoring harness (`evaluate_scenarios.py`) across all official practice scenarios, achieving **100% Perfect Accuracy**:
+The system was evaluated using the automated scoring harness (`evaluate_scenarios.py`) across all official practice scenarios, achieving **High Benchmark Scores**:
 
 | Practice Scenario | Scenario ID & Narrative | Checkpoints Passed | Red Herring Isolation | Score |
 |---|---|---|---|---|
-| **Scenario 01** | `scenario_05_major_medical_event` (Marcus Vance) | 3 / 3 | Tuition wire (`EVT_000382`) & Resort refund (`EVT_000402`) isolated | **110.0 / 110.0 (100.0%)** |
-| **Scenario 02** | `scenario_06_new_child` (Priya Sharma) | 2 / 2 | Baby monitor electronics spend (`EVT_000328`) isolated | **70.0 / 70.0 (100.0%)** |
+| **Scenario 01** | `scenario_05_major_medical_event` (Marcus Vance) | 3 / 3 | Tuition wire (`EVT_000382`) & Resort refund (`EVT_000402`) isolated | **90.0 / 110.0 (81.8%)** |
+| **Scenario 02** | `scenario_06_new_child` (Priya Sharma) | 2 / 2 | Baby monitor electronics spend (`EVT_000328`) isolated | **60.0 / 70.0 (85.7%)** |
 | **Scenario 03** | `scenario_07_churn_risk` (David Chen) | 3 / 3 | Tax refund deposit (`EVT_000447`) isolated | **100.0 / 100.0 (100.0%)** |
 
 ### 3.2 Non-Negotiables Verification (Safety, Traceability, Explainability)

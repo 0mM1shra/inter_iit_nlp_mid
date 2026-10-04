@@ -118,7 +118,7 @@ def run_scenario_pipeline(scenario_dir, output_filename="inferred_events.json", 
             print(f"⚔️ {BOLD}Actor-Critic Debate Audit:{RESET} State -> {BOLD}{reconciled_synth['inferred_state']}{RESET} | Conf -> {BOLD}{reconciled_synth['confidence_band']}{RESET}")
 
         # 5. Action & Offer Selection
-        action_proposal = action_agent.decide_action(reconciled_synth, ts)
+        action_proposal = action_agent.decide_action(reconciled_synth, ts, state_board=state_board)
 
         # 6. Critique-Refiner & Guardrail Pass
         raw_support_texts = [s.get("payload", {}).get("raw_text", "") for s in features.get("support_logs", [])]

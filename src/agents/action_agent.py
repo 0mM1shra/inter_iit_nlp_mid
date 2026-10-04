@@ -1,15 +1,47 @@
 """
 Action & Offer Agent for ACT-TREE 360
-Decides specific interventions from the bounded action set and checks policy eligibility rules.
+Decides specific bounded interventions from product eligibility policies and state board evidence.
+Generates dynamic action recommendations without hardcoded scenario timestamps.
 """
 
+
 class ActionAgent:
-    def __init__(self, memory_engine):
+    def __init__(self, memory_engine=None):
         self.memory_engine = memory_engine
 
-    def decide_action(self, synthesis_result, as_of_time_str):
-        inferred_state = synthesis_result["inferred_state"]
-        confidence = synthesis_result["confidence_band"]
+        # Policy Action Mapping (Inferred State -> Confidence -> Action Payload)
+        self.policy_matrix = {
+            "medical_hardship": {
+                "high": {
+                    "action": "support_intervention",
+                    "action_subtype": "medical_hardship_payment_plan",
+                    "notes": "High confidence medical hardship confirmed. Recommending medical hardship payment plan support intervention."
+                },
+                "medium": {
+                    "action": "no_action",
+                    "action_subtype": None,
+                    "notes": "Medical hardship signal accumulating; withholding intervention until high confidence."
+                }
+            },
+            "new_child_life_event": {
+                "high": {
+                    "action": "personalized_offer",
+                    "action_subtype": "childcare_savings_or_insurance_plan",
+                    "notes": "New child life event confirmed via anchor signals. Surfacing personalized childcare savings/insurance offer."
+                }
+            },
+            "churn_risk": {
+                "high": {
+                    "action": "relationship_manager_escalation",
+                    "action_subtype": "premium_retention_offer_and_fee_waiver",
+                    "notes": "High confidence churn risk detected via standing instruction cancellation and engagement drop. Escalate to relationship manager."
+                }
+            }
+        }
+
+    def decide_action(self, synthesis_result, as_of_time_str, state_board=None):
+        inferred_state = synthesis_result.get("inferred_state")
+        confidence = synthesis_result.get("confidence_band")
 
         if inferred_state == "no_significant_event" or confidence == "low":
             return {
@@ -18,58 +50,28 @@ class ActionAgent:
                 "notes": synthesis_result.get("notes", "Signal confidence insufficient to trigger action.")
             }
 
-        if inferred_state == "medical_hardship":
-            if confidence == "high":
+        # Handle specific churn stage policy check (proactive retention vs relationship manager escalation)
+        if inferred_state == "churn_risk" and confidence == "high" and state_board:
+            snapshot = state_board.snapshot(as_of_time_str)
+            login_trend = snapshot.get("login_frequency_trend")
+            login_val = login_trend.get("value", 0) if login_trend else 0
+
+            # If engagement has severely dropped (login_val <= -0.5), route to proactive retention outreach
+            if login_val <= -0.5:
                 return {
-                    "action": "support_intervention",
-                    "action_subtype": "medical_hardship_payment_plan",
-                    "notes": "Medical hardship confirmed. Recommending medical hardship payment plan support intervention."
-                }
-            else:
-                return {
-                    "action": "no_action",
+                    "action": "proactive_retention_outreach",
                     "action_subtype": None,
-                    "notes": "Medical hardship signal building, but action withheld until high confidence."
+                    "notes": "Severe engagement drop and churn signals detected; initiating proactive retention outreach."
                 }
 
-        elif inferred_state == "new_child_life_event":
-            if confidence == "high":
-                return {
-                    "action": "personalized_offer",
-                    "action_subtype": "childcare_savings_or_insurance_plan",
-                    "notes": "New child life event confirmed. Surface personalized childcare savings/insurance offer."
-                }
-            else:
-                return {
-                    "action": "no_action",
-                    "action_subtype": None,
-                    "notes": "Early baby retail spend detected, but action withheld until anchor events arrive."
-                }
+        state_policies = self.policy_matrix.get(inferred_state, {})
+        action_payload = state_policies.get(confidence)
 
-        elif inferred_state == "churn_risk":
-            if confidence == "high":
-                # Check timestamp or stage for relationship manager vs retention outreach
-                if "04-10" in as_of_time_str or "04-0" in as_of_time_str:
-                    return {
-                        "action": "proactive_retention_outreach",
-                        "action_subtype": None,
-                        "notes": "Late stage churn risk; initiating proactive retention outreach."
-                    }
-                else:
-                    return {
-                        "action": "relationship_manager_escalation",
-                        "action_subtype": "premium_retention_offer_and_fee_waiver",
-                        "notes": "Standing instruction cancelled and savings transferred. Route to relationship manager for retention."
-                    }
-            else:
-                return {
-                    "action": "no_action",
-                    "action_subtype": None,
-                    "notes": "Initial app drop detected, action withheld."
-                }
+        if action_payload:
+            return dict(action_payload)
 
         return {
             "action": "no_action",
             "action_subtype": None,
-            "notes": "Default bounded decision."
+            "notes": f"State '{inferred_state}' with confidence '{confidence}' does not satisfy policy action threshold."
         }

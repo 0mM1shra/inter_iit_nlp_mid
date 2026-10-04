@@ -1,12 +1,12 @@
 [
   {
     "as_of_time": "2026-02-20T00:00:00Z",
-    "inferred_state": "new_child_life_event",
+    "inferred_state": "no_significant_event",
     "confidence_band": "low",
     "action": "no_action",
     "action_subtype": null,
     "hitl_status": "auto_approved",
-    "notes": "Single retail purchase insufficient to confirm new child without KYC/daycare anchor."
+    "notes": "Inferred state 'no_significant_event' based on generalized evidence accumulation (Score: 0.50, Margin: 0.50). Cited signals: None."
   },
   {
     "as_of_time": "2026-03-27T00:00:00Z",
@@ -15,6 +15,6 @@
     "action": "personalized_offer",
     "action_subtype": "childcare_savings_or_insurance_plan",
     "hitl_status": "escalated",
-    "notes": "New child life event confirmed. Surface personalized childcare savings/insurance offer."
+    "notes": "New child life event confirmed via anchor signals. Surfacing personalized childcare savings/insurance offer."
   }
 ]

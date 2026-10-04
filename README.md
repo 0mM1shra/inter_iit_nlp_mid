@@ -188,6 +188,18 @@ FINAL SCORE: 100.0 / 100.0 (100.0%)
 ```
 inter_iit_nlp_mid/
 ├── README.md                                   # Root Landing Page & Comprehensive Overview
+├── docker-compose.yml                          # Production Compose (PostgreSQL+pgvector, Redis, Kafka, FastAPI)
+├── requirements.txt                            # Pinned Dependencies (LangGraph, OpenAI, FastAPI, pgvector)
+├── app/                                        # ENTERPRISE LANGGRAPH & FASTAPI APPLICATION
+│   ├── main.py                                 # FastAPI Entrypoint & Interactive HITL Web Dashboard
+│   ├── schemas/                                # Pydantic Event, Finding, CustomerState & Action Schemas
+│   ├── database/                               # SQLAlchemy Database Models & Repositories
+│   ├── memory/                                 # 3-Tier Memory (Redis Working, Postgres Episodic, pgvector Semantic)
+│   ├── streaming/                              # Kafka Producer, Consumer & Event Topics
+│   ├── agents/                                 # Swarm, Correlation, Offer, Retention & Critique Agents
+│   ├── guardrails/                             # Deterministic Rules & Emergency Scanner
+│   ├── hitl/                                   # HITL Routing & Interactive Web Interface Service
+│   └── observability/                          # OpenTelemetry Tracing & Audit Logger
 ├── endterm_submission/                         # END-TERM SUBMISSION DELIVERABLES
 │   ├── ENDTERM_SUBMISSION.md                 # Central End-Term Index & Execution Guide
 │   ├── 01_research_log.md                    # Research Log & Theoretical Grounding (30% Weight)
@@ -196,30 +208,15 @@ inter_iit_nlp_mid/
 │   ├── 04_testing_and_evaluation.md          # Benchmark Evaluation Report & Failure Mode Analysis
 │   └── Endterm_final_report.pdf              # Compiled Comprehensive Master Report (PDF)
 ├── midterm_submission/                         # MID-TERM SUBMISSION ARCHIVE
-│   ├── MIDTERM_SUBMISSION.md                 # Mid-Term Submission Index
-│   ├── 01_preliminary_research_document.md     # Preliminary Research Document
-│   ├── 02_preliminary_system_architecture.md   # Preliminary System Architecture Spec
-│   └── 03_one_page_report.pdf                  # One-Page Executive Report (PDF)
-├── src/                                      # PRODUCTION PYTHON ENGINE CODEBASE (25% Weight)
+├── src/                                      # CORE PYTHON ENGINE & NLP MODULES (25% Weight)
+│   ├── nlp_engine.py                         # Genuine NLP Engine (VADER Sentiment & TF-IDF Vector Intent)
 │   ├── stream_processor.py                   # Event-time watermarking & sliding window aggregations
 │   ├── state_board.py                        # Shared Per-Customer State Board with decay
 │   ├── memory_engine.py                      # 3-Tiered Memory Architecture (Working, Episodic, Semantic)
 │   ├── guardrails.py                         # Hard-stop keyword guardrails & data-layer PII redaction
 │   ├── hitl_engine.py                        # Calibrated HITL routing & citation graph generator
-│   └── agents/
-│       ├── usage_agent.py                    # App/web telemetry & login trend analyzer
-│       ├── support_agent.py                  # Support transcript NLP & sentiment scanner
-│       ├── txn_agent.py                      # Ledger anomaly scorer & standing instruction tracker
-│       ├── kyc_agent.py                      # Demographic & KYC update processor
-│       ├── synthesis_agent.py                # Bayesian Life-Phase Hypothesis Tree engine
-│       ├── debate_agent.py                   # Actor-Critic multi-agent debate engine
-│       ├── action_agent.py                   # Offer eligibility & action composer
-│       └── refiner_agent.py                  # Critique-Refiner compliance & tone auditor
+│   └── agents/                               # Specialist Agents (Usage, Support, Txn, KYC, Synthesis, Debate)
 ├── customer_360_dataset/                      # DATASET SCENARIOS & SCHEMAS
-│   ├── README_dataset_schema.md                # Event Schema & Output Enum Specifications
-│   ├── scenario_01/                            # Scenario 01: Medical Hardship (Marcus Vance)
-│   ├── scenario_02/                            # Scenario 02: New Child Life Event (Priya Sharma)
-│   └── scenario_03/                            # Scenario 03: Churn Risk (David Chen)
 ├── run_pipeline.py                           # Command-Line End-to-End Pipeline Entrypoint
 ├── evaluate_scenarios.py                     # Benchmark Evaluation Harness
 └── .gitignore
@@ -229,22 +226,32 @@ inter_iit_nlp_mid/
 
 ## 💻 Quickstart Guide: Running the Codebase
 
-### 1. Process Live Streams & Generate `inferred_events.json`
-Run the end-to-end pipeline across all practice scenarios:
+### 1. Launch Production Services (Docker Compose)
+Start PostgreSQL with pgvector, Redis, Kafka, and FastAPI web dashboard:
 
 ```bash
-python run_pipeline.py
+docker-compose up -d
+```
+
+Access the interactive HITL Web Dashboard at: `http://localhost:8000`
+
+### 2. Process Live Streams & Generate `inferred_events.json`
+Run the end-to-end pipeline across all practice scenarios using the virtual environment:
+
+```bash
+.\venv\Scripts\python run_pipeline.py
 ```
 
 Run on a single scenario:
 
 ```bash
-python run_pipeline.py customer_360_dataset/scenario_01
+.\venv\Scripts\python run_pipeline.py customer_360_dataset/scenario_01
 ```
 
-### 2. Run Automated Scoring Harness
+### 3. Run Automated Scoring Harness
 Evaluate generated predictions against practice scenario ground truths:
 
 ```bash
-python evaluate_scenarios.py customer_360_dataset/scenario_01/ground_truth.json customer_360_dataset/scenario_01/inferred_events.json
+.\venv\Scripts\python evaluate_scenarios.py customer_360_dataset/scenario_01/ground_truth.json customer_360_dataset/scenario_01/inferred_events.json
 ```
+
